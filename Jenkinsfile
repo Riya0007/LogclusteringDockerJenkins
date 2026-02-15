@@ -1,5 +1,11 @@
 pipeline {
-    agent any
+
+    agent {
+        docker {
+            image 'docker:24-dind'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
+    }
 
     environment {
         IMAGE_NAME = "log-clustering:latest"
@@ -19,13 +25,20 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t $IMAGE_NAME ."
+                sh """
+                docker build -t $IMAGE_NAME .
+                """
             }
         }
 
         stage('Run Clustering') {
             steps {
-                sh "docker run --rm $IMAGE_NAME"
+                sh """
+                mkdir -p output
+                docker run --rm \
+                -v \$(pwd)/output:/app/output \
+                $IMAGE_NAME
+                """
             }
         }
 
