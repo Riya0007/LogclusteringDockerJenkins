@@ -1,0 +1,11 @@
+log,cluster
+"Error: Database connection failed
+",1
+"Warning: Disk almost full
+",0
+"Error: Unable to fetch user data
+",1
+"Info: User logged in
+",1
+"Warning: High memory usage detected
+",0

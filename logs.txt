@@ -1,0 +1,5 @@
+Error: Database connection failed
+Warning: Disk almost full
+Error: Unable to fetch user data
+Info: User logged in
+Warning: High memory usage detected
